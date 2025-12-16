@@ -11,10 +11,16 @@ import java.util.TreeMap;
 public record AnalyticsCounter(ISymptomReader symptomReader,
                                ISymptomWriter symptomWriter) implements IAnalyticsCounter {
 
+    /**
+     * {@inheritDoc}
+     */
     public List<String> getSymptoms() {
         return symptomReader.getSymptoms();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Map<String, Integer> countSymptoms(List<String> symptoms) {
         Map<String, Integer> countSymptoms = new TreeMap<>();
         for (String symptom : symptoms) {
@@ -24,10 +30,16 @@ public record AnalyticsCounter(ISymptomReader symptomReader,
         return countSymptoms;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) {
-        return symptoms;
+        return new TreeMap<>(symptoms);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void writeSymptoms(Map<String, Integer> symptoms) {
         symptomWriter.symptomsWriterFile(symptoms);
     }

@@ -21,6 +21,10 @@ public record ReadSymptomDataFromFile(String filepath) implements ISymptomReader
     public ReadSymptomDataFromFile {
     }
 
+    /**
+     * Read input file line by line and return a list
+     * @return a raw listing of all Symptoms obtained from a data source, duplicates are possible/probable
+     */
     @Override
     public List<String> getSymptoms() {
         ArrayList<String> result = new ArrayList<>();
