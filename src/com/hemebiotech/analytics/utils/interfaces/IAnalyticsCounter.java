@@ -9,14 +9,14 @@ public interface IAnalyticsCounter {
      *
      * @return List of all symptoms who can contains duplicate symptom
      */
-    public List<String> getSymptoms();
+    List<String> getSymptoms();
 
     /**
      * Counts how many times each symptom appears in the list.
      * @param symptoms list of symptom names who can contains duplicate symptom
      * @return Sorted Map where keys are symptom names and values are their occurrence counts
      */
-    public Map<String, Integer> countSymptoms(List<String> symptoms);
+    Map<String, Integer> countSymptoms(List<String> symptoms);
 
     /**
      * Waiting Map and give new Map sorted by their names in alphabetical order.

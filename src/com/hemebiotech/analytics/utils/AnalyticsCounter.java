@@ -4,12 +4,17 @@ import com.hemebiotech.analytics.data.interfaces.ISymptomReader;
 import com.hemebiotech.analytics.repository.interfaces.ISymptomWriter;
 import com.hemebiotech.analytics.utils.interfaces.IAnalyticsCounter;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
-public record AnalyticsCounter(ISymptomReader symptomReader,
-                               ISymptomWriter symptomWriter) implements IAnalyticsCounter {
+public final class AnalyticsCounter implements IAnalyticsCounter {
+    private final ISymptomReader symptomReader;
+    private final ISymptomWriter symptomWriter;
+
+    public AnalyticsCounter(ISymptomReader symptomReader,
+                            ISymptomWriter symptomWriter) {
+        this.symptomReader = symptomReader;
+        this.symptomWriter = symptomWriter;
+    }
 
     /**
      * {@inheritDoc}
@@ -22,7 +27,7 @@ public record AnalyticsCounter(ISymptomReader symptomReader,
      * {@inheritDoc}
      */
     public Map<String, Integer> countSymptoms(List<String> symptoms) {
-        Map<String, Integer> countSymptoms = new TreeMap<>();
+        Map<String, Integer> countSymptoms = new HashMap<>();
         for (String symptom : symptoms) {
             int number = countSymptoms.getOrDefault(symptom, 0) + 1;
             countSymptoms.put(symptom, number);
@@ -43,4 +48,5 @@ public record AnalyticsCounter(ISymptomReader symptomReader,
     public void writeSymptoms(Map<String, Integer> symptoms) {
         symptomWriter.symptomsWriterFile(symptoms);
     }
+
 }
